@@ -4,6 +4,7 @@
 </head>
 <body>
 	<h2>Posts for <%= category.name %></h2>
+	<h3><%= category.description %></h3>
 	<h4>Total Votes: <% sum = category.upvote + category.downvote %><%= sum %><h4>
 			<form action='/category/<%= category.name %>/upvote' method='POST'>
 				<input type='hidden' name='_method' value='PUT'>
@@ -13,7 +14,7 @@
 				<input type='hidden' name='_method' value='PUT'>
 				<button>DOWNVOTE</button>
 			</form>
-
+	
 			<form action='/category/<%= category.name %>' method='POST'>
 				<input type='hidden' name='_method' value='DELETE'>
 				<button>DELETE</button>
@@ -21,6 +22,12 @@
 
 	<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
 	
+	<h3>Posts in this category</h3>
+	<ul>
+		<% posts.each do |post| %>
+		<li><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></li>
+		<% end %>
+	</ul>
 
 </body>
 </html>

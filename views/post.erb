@@ -1,22 +1,19 @@
 <html>
 <head>
-	<title>New Post</title>
+	<title>Post</title>
 </head>
 <body>
+	<% post %>
+
+	<h3> <%= post.title %> </h3>
+	<h4><em><%= post.cat_name %></h4>
+	<p> <%= post.content %></p>
+	<p><em>By: <%= post.author %> <%= post.created_at %></em></p>
+	<% if post.expiration == true %>
+		<p>This post expires on <%= post.exp_date %></p>
+		<% end %>
+
+
 	
-	<h3>Add a New Post</h3>
-	
-	<form action='/category/<%= category.name %>/post/new' method="POST">
-		<label>Title: <input type='text' name='title' placeholder='Title'></label>
-		<label>Content: <input type='text' name='content' placeholder='Your Thoughts...'></label>
-		<label>Image URL: <input type='text' name='url' placeholder='Insert Image URl'></lable>	
-		<label>Author: <input type='text' name='author' placeholder='Your Name'></label>
-		<label>Post Expiration? <input type='checkbox' name='expiration' value='true'></label>
-		<button>Submit</button>
-	</form> 	
-
-
-
-
 </body>
 </html>

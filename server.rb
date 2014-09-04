@@ -37,10 +37,9 @@ end
 get '/category/:name' do
 	cat_name = params['name']
 	category = Category.find_by(name: cat_name)
+	posts = Post.where({cat_name: cat_name})
 	
-	# posts=Post.select_by(cat_name: cat_name)
-
-	erb(:category, {locals: {category: category}})
+	erb(:category, {locals: {category: category, posts: posts}})
 
 end
 
@@ -105,7 +104,7 @@ cat_name=params['name']
 category=Category.find_by(name: cat_name)
 
 
-erb(:post, {locals: {category: category}})
+erb(:newPost, {locals: {category: category}})
 
 end
 
@@ -145,10 +144,16 @@ post '/category/:name/post/new' do
 		exp_date: exp_date
 		})
 
-redirect "/category/#{cat_name}"
+redirect "/category/#{cat_name}/post/#{new_post.id}"
 
 end
 
+#VIEW POST
+get '/category/:name/post/:id' do
+
+post = Post.find_by(id: params['id'])
+	erb(:post, {locals: {post: post}})
+end
 
 
 
