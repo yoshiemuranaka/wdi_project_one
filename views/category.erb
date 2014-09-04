@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Category</title>
+</head>
+<body>
+	<h2>Posts for <%= category.name %></h2>
+	<h4>Total Votes: <% sum = category.upvote + category.downvote %><%= sum %><h4>
+			<form action='/category/<%= category.name %>/upvote' method='POST'>
+				<input type='hidden' name='_method' value='PUT'>
+				<button>UPVOTE</button>
+			</form>
+			<form action='/category/<%= category.name %>/downvote' method='POST'>
+				<input type='hidden' name='_method' value='PUT'>
+				<button>DOWNVOTE</button>
+			</form>
+
+			<form action='/category/<%= category.name %>' method='POST'>
+				<input type='hidden' name='_method' value='DELETE'>
+				<button>DELETE</button>
+			</form>
+
+	<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
+	
+
+</body>
+</html>
