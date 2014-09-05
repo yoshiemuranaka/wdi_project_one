@@ -4,6 +4,7 @@ require 'sinatra/reloader'
 require_relative './db/connection'
 require_relative './models/category'
 require_relative './models/post'
+require_relative './models/comment'
 
 
 after do
@@ -143,8 +144,10 @@ get '/category/:name/post/:id' do
 	category = Category.find_by(name: cat_name)
 	post = Post.find_by(id: params['id'])
 	categories = Category.all
+	post_id=params['id']
+	comments=Comment.where({post_id: post_id})
 	
-	erb(:post, {locals: {post: post, posts: posts, category: category, categories: categories}})
+	erb(:post, {locals: {post: post, posts: posts, category: category, categories: categories, comments: comments}})
 end
 
 #POST UPVOTE
@@ -173,6 +176,28 @@ put '/category/:name/post/:id/downvote' do
 	post.update({downvote: new_downvote})
 
 	redirect "/category/#{post.cat_name}/post/#{post_id}"
+
+end
+
+
+post '/category/:name/post/:id/comment' do
+
+	post_id=params['id']
+	cat_name=params['name']
+	title=params['title']
+	author=params['author']
+	comment=params['comment']
+
+	Comment.create({
+		post_id: post_id,
+		cat_name: cat_name,
+		title: title,
+		content: comment,
+		author: author
+		})
+
+	redirect "/category/#{cat_name}/post/#{post_id}"
+
 
 end
 

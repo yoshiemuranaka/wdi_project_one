@@ -9,8 +9,26 @@
 <body>
 	
 	<div id='page_content'>
+		<div id='page_content'>
 		<h2>Posts for <%= category.name %></h2>
 		<h3><em>...<%= category.description %></em></h3>
+		
+		<div id='vote'>
+			<p><em>Total Votes: <% sum = category.upvote + category.downvote %><%= sum %></em></p>
+					<form action='/category/<%= category.name %>/upvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>UPVOTE</button>
+					</form>
+					<form action='/category/<%= category.name %>/downvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>DOWNVOTE</button>
+					</form>
+
+					<form action='/category/<%= category.name %>' method='POST'>
+						<input type='hidden' name='_method' value='DELETE'>
+						<button>DELETE</button>
+					</form>
+			</div>
 		
 		<div id='newPost'>
 		<h3> <%= post.title %> </h3>
@@ -34,6 +52,32 @@
 
 
 
+		<h3>Leave a comment</h3>
+		<div id='comments'>
+			
+
+			<form action='/category/<%= category.name %>/post/<%= post.id %>/comment' method='POST'>
+				<input type='text' name='title' placeholder='Title'>
+				<input type='text' name='author' placeholder='Your Name'>
+				<input type='text' name='comment' placeholder='Comment'>
+				<button>Submit</button>
+			</form>
+
+			<% comments.each do |comment| %>
+				<h4><%= comment.title %></h4>
+				<p><%= comment.content %></p>
+				<% if comment.author != ''%>
+					<p>Posted by: <%= comment.author %></p>
+				<% else %>
+					<p> Posted by: Anonymous </p>
+				<% end %>
+			<% end %>
+
+		</div id='comments'>
+
+
+
+		<h3> Other posts in this Category</h3>
 		<% posts.each do |post| %>
 			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
 			<% end %>

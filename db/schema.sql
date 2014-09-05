@@ -18,3 +18,12 @@ CREATE TABLE posts(
 	expiration boolean,
 	exp_date date,
 );
+
+CREATE TABLE comments(
+	id serial primary key,
+	post_id integer,
+	cat_id integer,
+	title varchar(255),
+	content text,
+	author varchar(255),
+	created_at timestamp);
