@@ -38,8 +38,9 @@ get '/category/:name' do
 	cat_name = params['name']
 	category = Category.find_by(name: cat_name)
 	posts = Post.where({cat_name: cat_name})
+	categories =Category.all
 	
-	erb(:category, {locals: {category: category, posts: posts}})
+	erb(:category, {locals: {category: category, posts: posts, categories: categories}})
 
 end
 
@@ -63,14 +64,7 @@ put '/category/:name/upvote' do
 	upvote = category.upvote
 	new_upvote = upvote + 1
 
-	category_hash={
-		name: category.name, 
-		description: category.description, 
-		upvote: new_upvote, 
-		downvote: category.downvote
-	}
-
-	category.update(category_hash)
+	category.update({upvote: new_upvote})
 
 	redirect "/category/#{category.name}"
 
@@ -84,14 +78,7 @@ put '/category/:name/downvote' do
 	downvote = category.downvote
 	new_downvote = downvote + 1
 
-	category_hash={
-		name: category.name, 
-		description: category.description, 
-		upvote: category.upvote, 
-		downvote: new_downvote
-	}
-
-	category.update(category_hash)
+	category.update({downvote: new_downvote})
 
 	redirect "/category/#{category.name}"
 
@@ -102,34 +89,34 @@ get '/category/:name/post/new' do
 
 cat_name=params['name']
 category=Category.find_by(name: cat_name)
+categories = Category.all
 
-
-erb(:newPost, {locals: {category: category}})
+erb(:newPost, {locals: {category: category, categories: categories}})
 
 end
 
 #TO ADD NEW POST
 post '/category/:name/post/new' do
-	binding.pry
+
 	title = params['title']
 	content= params['content']
 	url = params['url']
 	author= params['author']
 		category=Category.find_by(name: params['name'])
 	cat_name= category.name 
-
+	#SETS EXPIRATION BOOLEAN IN POST TABLE
 	if params['expiration'] 
 		expiration = true
-		exp_date = Time.now
+		exp_date = Time.now #####ADD PROPER EXP DATE
 	else
 		expiration = false
 		exp_date = nil
 	end
-
-	if params['author'] != nil
+	#SETS AUTHOR IN POST TABLE
+	if params['author'] != ''
 		author= params['author']
 	else
-		author= 'unknown'
+		author= "Anonymous"
 	end
 
 	new_post = Post.create({
@@ -151,8 +138,42 @@ end
 #VIEW POST
 get '/category/:name/post/:id' do
 
-post = Post.find_by(id: params['id'])
-	erb(:post, {locals: {post: post}})
+	cat_name=params['name']
+	posts = Post.where({cat_name: cat_name})
+	category = Category.find_by(name: cat_name)
+	post = Post.find_by(id: params['id'])
+	categories = Category.all
+	
+	erb(:post, {locals: {post: post, posts: posts, category: category, categories: categories}})
+end
+
+#POST UPVOTE
+put '/category/:name/post/:id/upvote' do
+
+	post_id=params['id']
+	post=Post.find_by(id: post_id)
+	upvote = post.upvote
+	new_upvote = upvote + 1
+
+	post.update({upvote: new_upvote})
+
+	redirect "/category/#{post.cat_name}/post/#{post_id}"
+
+end
+
+
+#POST DOWNVOTE
+put '/category/:name/post/:id/downvote' do
+
+	post_id=params['id']
+	post=Post.find_by(id: post_id)
+	downvote = post.downvote
+	new_downvote = downvote + 1
+
+	post.update({downvote: new_downvote})
+
+	redirect "/category/#{post.cat_name}/post/#{post_id}"
+
 end
 
 

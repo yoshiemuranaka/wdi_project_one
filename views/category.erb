@@ -1,33 +1,51 @@
 <html>
 <head>
 	<title>Category</title>
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<h2>Posts for <%= category.name %></h2>
-	<h3><%= category.description %></h3>
-	<h4>Total Votes: <% sum = category.upvote + category.downvote %><%= sum %><h4>
-			<form action='/category/<%= category.name %>/upvote' method='POST'>
-				<input type='hidden' name='_method' value='PUT'>
-				<button>UPVOTE</button>
-			</form>
-			<form action='/category/<%= category.name %>/downvote' method='POST'>
-				<input type='hidden' name='_method' value='PUT'>
-				<button>DOWNVOTE</button>
-			</form>
 	
-			<form action='/category/<%= category.name %>' method='POST'>
-				<input type='hidden' name='_method' value='DELETE'>
-				<button>DELETE</button>
-			</form>
+	<div id='page_content'>
+		<h2>Posts for <%= category.name %></h2>
+		<h3><em>...<%= category.description %></em></h3>
+		
+		<div id='vote'>
+			<p><em>Total Votes: <% sum = category.upvote + category.downvote %><%= sum %></em></p>
+					<form action='/category/<%= category.name %>/upvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>UPVOTE</button>
+					</form>
+					<form action='/category/<%= category.name %>/downvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>DOWNVOTE</button>
+					</form>
 
-	<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
-	
-	<h3>Posts in this category</h3>
-	<ul>
-		<% posts.each do |post| %>
-		<li><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></li>
-		<% end %>
-	</ul>
+					<form action='/category/<%= category.name %>' method='POST'>
+						<input type='hidden' name='_method' value='DELETE'>
+						<button>DELETE</button>
+					</form>
+			</div>
+
+		<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
+		
+		<h3>Posts in this category</h3>
+			<% posts.each do |post| %>
+			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
+			<% end %>
+	</div id='page_content'>
+
+
+	<div id='sidebar'>
+		<h1><a href='/'>Welcome</a></h1>
+		<h3>Browse Categories:</h3>
+		<ul>
+		<% categories.each do |category| %>
+			<li><a href='/category/<%= category.name %>'><%= category.name %></a></li>
+			<% end %>
+		</ul>
+	</div id='sidebar'>
 
 </body>
 </html>

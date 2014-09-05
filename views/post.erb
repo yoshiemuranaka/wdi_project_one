@@ -1,19 +1,56 @@
 <html>
 <head>
 	<title>Post</title>
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
-	<% post %>
-
-	<h3> <%= post.title %> </h3>
-	<h4><em><%= post.cat_name %></h4>
-	<p> <%= post.content %></p>
-	<p><em>By: <%= post.author %> <%= post.created_at %></em></p>
-	<% if post.expiration == true %>
-		<p>This post expires on <%= post.exp_date %></p>
-		<% end %>
-
-
 	
+	<div id='page_content'>
+		<h2>Posts for <%= category.name %></h2>
+		<h3><em>...<%= category.description %></em></h3>
+		
+		<div id='newPost'>
+		<h3> <%= post.title %> </h3>
+		<div id='vote'>
+			<p><em>Total Votes: <% sum = post.upvote + post.downvote %><%= sum %> </em></p>
+					<form action='/category/<%= category.name %>/post/<%= post.id %>/upvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>UPVOTE</button>
+					</form>
+					<form action='/category/<%= category.name %>/post/<%= post.id %>/downvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>DOWNVOTE</button>
+					</form>
+		</div id='vote'>
+		<p> <%= post.content %></p>
+		<p><em>By: <%= post.author %> <%= post.created_at %></em></p>
+		<% if post.expiration == true %>
+			<p>This post expires on <%= post.exp_date %></p>
+			<% end %>
+		</div id='newPost'>
+
+
+
+		<% posts.each do |post| %>
+			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
+			<% end %>
+			</div>
+	</div id='page_content'>
+
+	<div id='sidebar'>
+		<h1><a href='/'>Welcome</a></h1>
+		<h3>Browse Categories:</h3>
+		<ul>
+		<% categories.each do |category| %>
+			<li><a href='/category/<%= category.name %>'><%= category.name %></a></li>
+			<% end %>
+		</ul>
+	</div id='sidebar'>
+
+
+
 </body>
 </html>

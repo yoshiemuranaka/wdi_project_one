@@ -1,24 +1,32 @@
 <html>
 <head>
 	<title>Welcome Home</title>
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 	
-	<h2>Welcome</h2>
-	<h3>Browse Categories</h3>
-	<ul>
-	<% categories.each do |category| %>
-		<li><a href='/category/<%= category.name %>'><%= category.name %></a></li>
-		<% end %>
-	</ul>
-	
-	<h3>Create a New Category</h3>
-	
-	<form action='/' method='POST'>
-		<label>Name: <input type='text' name='name' placeholder='Category Name'></label>
-		<label>Description <input type='text' name='description' placeholder='Short Description'></label>
-		<button>Create</button>
-	</form>
+	<div id='page_content'>
+		<h3>Create a New Category</h3>
+		
+		<form action='/' method='POST'>
+			<label>Name: <input type='text' name='name' placeholder='Category Name'></label>
+			<label>Description: <input type='text' name='description' placeholder='Short Description'></label>
+			<button>Create</button>
+		</form>
+	</div id='page_content'>
+
+	<div id='sidebar'>
+		<h1>Welcome</h1>
+		<h3>Browse Categories:</h3>
+		<ul>
+		<% categories.each do |category| %>
+			<li><a href='/category/<%= category.name %>'><%= category.name %></a></li>
+			<% end %>
+		</ul>
+	</div id='sidebar'>
 
 
 

@@ -1,0 +1,67 @@
+li{
+	display:inline;
+	padding: 10px;
+	text-decoration: none;
+}
+
+h1{
+	text-align: center;
+	font-family: 'Fugaz One', cursive;
+}
+
+h2, h3, h4{
+	text-align: center;
+	font-family: 'Play', sans-serif;
+}
+
+body{
+	width:1150px;
+	margin: 0 auto;
+}
+
+a{
+	text-decoration: none;
+	color:black;
+}
+
+
+.posts{
+	background-color: lightgrey;
+	height: 100px;
+	margin-bottom: 20px;
+}
+
+#vote input, form, p{
+	padding:0;
+	margin:0;
+	display:inline;
+}
+
+#vote{
+	text-align: center;
+}
+
+#newPost{
+	background-color: blanchedalmond;
+	height:200px;
+	margin-bottom: 40px;
+}
+
+#sidebar{
+	width:250px;
+	height: 100%;
+	float:left;
+	background-color: lightblue;
+}
+
+#sidebar li{
+	background-color: yellow;
+}
+
+#page_content{
+	float:right;
+	padding-top: 30px;
+	width:800px;
+	margin:0 auto;
+}
+
