@@ -1,6 +1,7 @@
 require 'pry'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'kramdown'
 require_relative './db/connection'
 require_relative './models/category'
 require_relative './models/post'
@@ -14,7 +15,7 @@ end
 
 get '/' do 
 
-categories = Category.all
+categories = Category.all.order(upvote: :desc)
 erb(:index, {locals: {categories: categories}})
 
 end
@@ -38,8 +39,9 @@ end
 get '/category/:name' do
 	cat_name = params['name']
 	category = Category.find_by(name: cat_name)
-	posts = Post.where({cat_name: cat_name})
+	posts = Post.where({cat_name: cat_name}).order(upvote: :desc)
 	categories =Category.all
+	categories=categories.order(upvote: :desc)
 	
 	erb(:category, {locals: {category: category, posts: posts, categories: categories}})
 
@@ -90,7 +92,7 @@ get '/category/:name/post/new' do
 
 cat_name=params['name']
 category=Category.find_by(name: cat_name)
-categories = Category.all
+categories = Category.all.order(upvote: :desc)
 
 erb(:newPost, {locals: {category: category, categories: categories}})
 
@@ -140,12 +142,12 @@ end
 get '/category/:name/post/:id' do
 
 	cat_name=params['name']
-	posts = Post.where({cat_name: cat_name})
+	posts = Post.where({cat_name: cat_name}).order(upvote: :desc)
 	category = Category.find_by(name: cat_name)
 	post = Post.find_by(id: params['id'])
-	categories = Category.all
+	categories = Category.all.order(upvote: :desc)
 	post_id=params['id']
-	comments=Comment.where({post_id: post_id})
+	comments=Comment.where({post_id: post_id}).order(created_at: :desc)
 	
 	erb(:post, {locals: {post: post, posts: posts, category: category, categories: categories, comments: comments}})
 end
@@ -179,7 +181,7 @@ put '/category/:name/post/:id/downvote' do
 
 end
 
-
+#POST NEW COMMENT
 post '/category/:name/post/:id/comment' do
 
 	post_id=params['id']

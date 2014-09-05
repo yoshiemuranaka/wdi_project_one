@@ -22,15 +22,18 @@
 						<button>DOWNVOTE</button>
 					</form>
 
+<!-- delete button v -->	
+				<% if Post.find_by(cat_name: category.name) == nil %>
 					<form action='/category/<%= category.name %>' method='POST'>
 						<input type='hidden' name='_method' value='DELETE'>
 						<button>DELETE</button>
 					</form>
+					<% end %>
 			</div>
 
 		<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
 		
-		<h3>Posts in this category</h3>
+		<h3>Posts in this Category</h3>
 			<% posts.each do |post| %>
 			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
 			<% end %>
