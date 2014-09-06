@@ -15,7 +15,12 @@
 			<label>Content: <input type='text' name='content' placeholder='Your Thoughts...'></label>
 			<label>Image URL: <input type='text' name='url' placeholder='Insert Image URl'></lable>	
 			<label>Author: <input type='text' name='author' placeholder='Your Name'></label>
-			<label>Post Expiration? <input type='checkbox' name='expiration' value='true'></label>
+			<label>Post Expiration: <select name='expiration'>
+				<option value='0'>none</option>
+				<option value='259200'>3 days</option>
+				<option value='604800'>1 week</option>
+				<option value='2592000'>30 days</option>
+			</select>
 			<button>Submit</button>
 		</form> 
 	</div id='page_content'>	

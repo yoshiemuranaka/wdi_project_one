@@ -24,6 +24,8 @@
 			<% end %>
 			<div id='vote'>
 			<p><em>Total Votes: <% sum = post.upvote + post.downvote %><%= sum %> </em></p>
+			<!-- allowing voting interaction if exp_date=none || exp_date > Time.now -->
+			<% if post.expiration == false %> 		
 					<form action='/category/<%= category.name %>/post/<%= post.id %>/upvote' method='POST'>
 						<input type='hidden' name='_method' value='PUT'>
 						<button>UPVOTE</button>
@@ -32,20 +34,44 @@
 						<input type='hidden' name='_method' value='PUT'>
 						<button>DOWNVOTE</button>
 					</form>
+
+			<% elsif post.exp_date >= Time.now %>
+					<form action='/category/<%= category.name %>/post/<%= post.id %>/upvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>UPVOTE</button>
+					</form>
+					<form action='/category/<%= category.name %>/post/<%= post.id %>/downvote' method='POST'>
+						<input type='hidden' name='_method' value='PUT'>
+						<button>DOWNVOTE</button>
+					</form>
+			<% end %>
+
 		</div id='vote'>
 		</div id='newPost'>
 
 
 		<h3>Leave a comment</h3>
 		<div id='comments'>
-			
-
+		<!-- close post for comments if expiration date is reached -->	
+		<% if post.expiration == false%> 	
 			<form action='/category/<%= category.name %>/post/<%= post.id %>/comment' method='POST'>
 				<input type='text' name='title' placeholder='Title'>
 				<input type='text' name='author' placeholder='Your Name'>
 				<input type='text' name='comment' placeholder='Comment'>
 				<button>Submit</button>
 			</form>
+		
+		<% elsif post.exp_date >= Time.now %>
+			<form action='/category/<%= category.name %>/post/<%= post.id %>/comment' method='POST'>
+				<input type='text' name='title' placeholder='Title'>
+				<input type='text' name='author' placeholder='Your Name'>
+				<input type='text' name='comment' placeholder='Comment'>
+				<button>Submit</button>
+			</form>
+		
+		<% else %>
+			<p><em>This post is closed for comments</em></p>
+		<% end %>
 
 			<% comments.each do |comment| %>
 				<h4><%= comment.title %></h4>
@@ -60,12 +86,13 @@
 		</div id='comments'>
 
 
-
 		<h3> Other Posts in this Category</h3>
 		<% posts.each do |post| %>
 			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
 			<% end %>
 			</div>
+
+
 	</div id='page_content'>
 
 	<div id='sidebar'>

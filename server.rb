@@ -22,7 +22,7 @@ end
 
 # TO ADD A NEW CATEGORY
 post '/' do 
-	name= params['name']
+	name= params['name'].downcase
 	description = params['description']
 	
 	new_category=Category.create({
@@ -100,7 +100,7 @@ end
 
 #TO ADD NEW POST
 post '/category/:name/post/new' do
-
+#binding.pry
 	title = params['title']
 	content= params['content']
 	url = params['url']
@@ -108,12 +108,12 @@ post '/category/:name/post/new' do
 		category=Category.find_by(name: params['name'])
 	cat_name= category.name 
 	#SETS EXPIRATION BOOLEAN IN POST TABLE
-	if params['expiration'] 
+	if params['expiration'] != '0'
 		expiration = true
-		exp_date = Time.now #####ADD PROPER EXP DATE
+		exp_date = Time.now + params['expiration'].to_i
 	else
 		expiration = false
-		exp_date = nil
+		exp_date = Time.now
 	end
 	#SETS AUTHOR IN POST TABLE
 	if params['author'] != ''
