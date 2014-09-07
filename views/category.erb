@@ -4,11 +4,13 @@
 	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	
 	<div id='page_content'>
-		<h2>Posts for <%= category.name %></h2>
+		<h2>Posts for <p style="color:red;"><%= category.name %></p></h2>
+
 		<h3><em>...<%= category.description %></em></h3>
 		
 		<div id='vote'>
@@ -32,11 +34,13 @@
 			</div>
 
 		<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
-		
+	
 		<h3>Posts in this Category</h3>
 			<% posts.each do |post| %>
-			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
+			<div id='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div id='posts'>
 			<% end %>
+			<%= will_paginate posts %>
+			
 	</div id='page_content'>
 
 

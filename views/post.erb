@@ -4,17 +4,18 @@
 	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
-
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	
+	
 	<div id='page_content'>
-		<div id='page_content'>
-		<h2>Posts for <%= category.name %></h2>
+		<h2>Post for <a href='/category/<%= category.name %>'<p style="color:red; font-family: 'Lora', serif;"><%= category.name %></p></a></h2>
 		<h3><em>...<%= category.description %></em></h3>
 		
 		
 		<div id='newPost'>
+
 		<h3> <%= post.title %> </h3>
 		<% content =post.content %>
 		<p><%= Kramdown::Document.new(content).to_html %></p>
@@ -46,13 +47,14 @@
 					</form>
 			<% end %>
 
-		</div id='vote'>
+			</div id='vote'>
+
 		</div id='newPost'>
 
 
 		<h3>Leave a comment</h3>
 		<div id='comments'>
-		<!-- close post for comments if expiration date is reached -->	
+		<!-- close new comments if expiration date is reached -->	
 		<% if post.expiration == false%> 	
 			<form action='/category/<%= category.name %>/post/<%= post.id %>/comment' method='POST'>
 				<input type='text' name='title' placeholder='Title'>
@@ -84,16 +86,11 @@
 			<% end %>
 
 		</div id='comments'>
-
-
-		<h3> Other Posts in this Category</h3>
-		<% posts.each do |post| %>
-			<div class='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div>
-			<% end %>
-			</div>
-
-
+	
 	</div id='page_content'>
+
+
+
 
 	<div id='sidebar'>
 		<h1><a href='/'>Welcome</a></h1>

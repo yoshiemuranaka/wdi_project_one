@@ -19,6 +19,11 @@ h4{
 	font-family: 'Play', sans-serif;
 }
 
+
+p {
+	font-family: 'Lora', serif;
+}
+
 body{
 	width:1150px;
 	margin: 0 auto;
@@ -29,11 +34,17 @@ a{
 	color:black;
 }
 
+label{
+	font-family: 'Lora', serif;
+}
 
-.posts{
+
+#posts{
 	background-color: lightgrey;
-	height: 100px;
+	height: 50px;
+	width: 100%;
 	margin-bottom: 5px;
+	font-family: 'Lora', serif;
 }
 
 #vote input, form, p{
@@ -47,7 +58,7 @@ a{
 }
 
 #newPost{
-	background-color: blanchedalmond;
+	background-color: lightgrey;
 }
 
 
@@ -55,11 +66,12 @@ a{
 	width:250px;
 	height: 100%;
 	float:left;
-	background-color: lightblue;
 }
 
-#sidebar li{
-	background-color: yellow;
+#sidebar li a{
+	color: red;
+	font-family: 'Lora', serif;
+	font-weight: bold;
 }
 
 #page_content{
@@ -70,7 +82,7 @@ a{
 }
 
 #comments{
-	background-color: lightgreen;
+	background-color: lightgrey;
 	margin-bottom: 50px;
 }
 

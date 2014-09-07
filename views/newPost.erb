@@ -4,11 +4,12 @@
 	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 	<div id='page_content'>
-		<h2>Add a New Post for <%= category.name %></h2>
+		<h2>Add a New Post for <p style="color:red;"><%= category.name %></p></h2>
 		
 		<form action='/category/<%= category.name %>/post/new' method="POST">
 			<label>Title: <input type='text' name='title' placeholder='Title'></label>

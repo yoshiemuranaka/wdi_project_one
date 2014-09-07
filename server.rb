@@ -2,6 +2,8 @@ require 'pry'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'kramdown'
+require 'will_paginate'
+require 'will_paginate/active_record'
 require_relative './db/connection'
 require_relative './models/category'
 require_relative './models/post'
@@ -15,8 +17,9 @@ end
 
 get '/' do 
 
+posts = Post.paginate(:page => params[:page], :per_page => 2).order('upvote DESC')
 categories = Category.all.order(upvote: :desc)
-erb(:index, {locals: {categories: categories}})
+erb(:index, {locals: {categories: categories, posts: posts}})
 
 end
 
@@ -39,7 +42,7 @@ end
 get '/category/:name' do
 	cat_name = params['name']
 	category = Category.find_by(name: cat_name)
-	posts = Post.where({cat_name: cat_name}).order(upvote: :desc)
+	posts = Post.where({cat_name: cat_name}).paginate(:page => params['page'], :per_page => 2).order('created_at DESC')
 	categories =Category.all
 	categories=categories.order(upvote: :desc)
 	
@@ -148,7 +151,6 @@ get '/category/:name/post/:id' do
 	categories = Category.all.order(upvote: :desc)
 	post_id=params['id']
 	comments=Comment.where({post_id: post_id}).order(created_at: :desc)
-	
 	erb(:post, {locals: {post: post, posts: posts, category: category, categories: categories, comments: comments}})
 end
 

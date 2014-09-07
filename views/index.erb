@@ -4,7 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
-
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	
@@ -16,6 +16,15 @@
 			<label>Description: <input type='text' name='description' placeholder='Short Description'></label>
 			<button>Create</button>
 		</form>
+
+		<h2>Popular Posts</h2>
+
+		
+			<% posts.each do |post| %>
+			<div id='posts'><%= post.title %></div>
+			<% end %>
+			<%= will_paginate posts %>
+			
 	</div id='page_content'>
 
 	<div id='sidebar'>
