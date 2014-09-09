@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Thank You for Subscribing</title>
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fugaz+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	
+	<div id='page_content'>
+	
+	<h2>Thank you</h2>
+		<p>You will receive text updates for your subscription</p>
+
+	</div id='page_content'>
+
+
+	<div id='sidebar'>
+		<h1><a href='/'>welcome home</a></h1>
+		<h3>Browse Categories:</h3>
+		<ul>
+		<% categories.each do |category| %>
+			<li><a href='/category/<%= category.name %>'><%= category.name %></a></li>
+			<% end %>
+		</ul>
+	</div id='sidebar'>
+
+</body>
+</html>

@@ -17,12 +17,26 @@
 		<div id='newPost'>
 
 		<h3> <%= post.title %> </h3>
-		<% content =post.content %>
+			
+
+			<div id='subscribe'>
+				<p>Enter your phone number to receive text updates about this post!</p>
+				<br><form action='/category/<%= category.name %>/post/<%= post.id%>/subscribe' method='POST'>
+					<input type='text' name='phone' placeholder='555-5551234'>
+					<button>Subscribe</button>
+				</form>
+			</div id='subscribe'>
+
+
+		<br><% content =post.content %>
 		<p><%= Kramdown::Document.new(content).to_html %></p>
+		<br>
+		<img src='<%=post.image_url%>'>
 		<p><em>By: <%= post.author %> <%= post.created_at %></em></p>
-		<% if post.expiration == true %>
+		<br><% if post.expiration == true %>
 			<p>This post expires on <%= post.exp_date %></p>
 			<% end %>
+			<br>
 			<div id='vote'>
 			<p><em>Total Votes: <% sum = post.upvote + post.downvote %><%= sum %> </em></p>
 			<!-- allowing voting interaction if exp_date=none || exp_date > Time.now -->
@@ -57,17 +71,19 @@
 		<!-- close new comments if expiration date is reached -->	
 		<% if post.expiration == false%> 	
 			<form action='/category/<%= category.name %>/post/<%= post.id %>/comment' method='POST'>
-				<input type='text' name='title' placeholder='Title'>
-				<input type='text' name='author' placeholder='Your Name'>
-				<input type='text' name='comment' placeholder='Comment'>
+				<label>Title: <input type='text' name='title' placeholder='Title'></label>
+				<label>Author: <input type='text' name='author' placeholder='Your Name'></label>
+				<br><textarea rows= '5' cols='80' wrap='virtual' type='text' name='comment' placeholder='Your Thoughts...'></textarea>
+
 				<button>Submit</button>
 			</form>
 		
 		<% elsif post.exp_date >= Time.now %>
 			<form action='/category/<%= category.name %>/post/<%= post.id %>/comment' method='POST'>
-				<input type='text' name='title' placeholder='Title'>
-				<input type='text' name='author' placeholder='Your Name'>
-				<input type='text' name='comment' placeholder='Comment'>
+				<label>Title: <input type='text' name='title' placeholder='Title'></label>
+				<label>Author: <input type='text' name='author' placeholder='Your Name'></label>
+				<br><textarea rows= '5' cols='80' wrap='virtual' type='text' name='comment' placeholder='Your Thoughts...'></textarea>
+
 				<button>Submit</button>
 			</form>
 		
@@ -93,7 +109,7 @@
 
 
 	<div id='sidebar'>
-		<h1><a href='/'>Welcome</a></h1>
+		<h1><a href='/'>welcome home</a></h1>
 		<h3>Browse Categories:</h3>
 		<ul>
 		<% categories.each do |category| %>

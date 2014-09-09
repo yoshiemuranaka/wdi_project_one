@@ -11,24 +11,39 @@
 	<div id='page_content'>
 		<h2>Create a New Category</h2>
 		
+		<div id='newCat'>
 		<form action='/' method='POST'>
 			<label>Name: <input type='text' name='name' placeholder='Category Name'></label>
 			<label>Description: <input type='text' name='description' placeholder='Short Description'></label>
 			<button>Create</button>
 		</form>
+		</div id='newCat'>
+		
 
 		<h2>Popular Posts</h2>
+		<form action='/' method='GET'>
+			<label>Browse by: <select name='browse'>
+				<option>--</option>
+				<option value='votes'>Votes</option>
+				<option value='comments'>Comments</option>
+			</select>
+			<button>Browse</button>
+		</form>
 
-		
 			<% posts.each do |post| %>
-			<div id='posts'><%= post.title %></div>
+			<div id='posts'><h4 style='display:inline'><p><a style='color:red;' href='/category/<%=post.cat_name%>'><%=post.cat_name%></a></p></h4>
+							<h4 style='display:inline;'><a href='/category/<%=post.cat_name%>/post/<%=post.id%>'><%= post.title %></a></h4>
+							<p style='display:inline;'><em><%= post.content[0..50] %>...</em></p>
+							<p>-- <%= post.upvote%> Votes --</p>
+							<p><%= post.comments%> Comments --</p>
+			</div id='posts'>
 			<% end %>
 			<%= will_paginate posts %>
-			
+
 	</div id='page_content'>
 
 	<div id='sidebar'>
-		<h1>Welcome</h1>
+		<h1>welcome home</h1>
 		<h3>Browse Categories:</h3>
 		<ul>
 		<% categories.each do |category| %>

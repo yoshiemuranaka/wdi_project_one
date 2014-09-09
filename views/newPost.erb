@@ -11,23 +11,25 @@
 	<div id='page_content'>
 		<h2>Add a New Post for <p style="color:red;"><%= category.name %></p></h2>
 		
+		<div id='postForm'>
 		<form action='/category/<%= category.name %>/post/new' method="POST">
 			<label>Title: <input type='text' name='title' placeholder='Title'></label>
-			<label>Content: <input type='text' name='content' placeholder='Your Thoughts...'></label>
-			<label>Image URL: <input type='text' name='url' placeholder='Insert Image URl'></lable>	
 			<label>Author: <input type='text' name='author' placeholder='Your Name'></label>
-			<label>Post Expiration: <select name='expiration'>
+			<br><textarea rows= '10' cols='50' wrap='virtual' type='text' name='content' placeholder='Your Thoughts...'></textarea>
+			<br><label>Image URL: <input type='text' name='url' placeholder='Insert Image URl'></lable>	
+			<br><label>Post Expiration: <select name='expiration'>
 				<option value='0'>none</option>
 				<option value='259200'>3 days</option>
 				<option value='604800'>1 week</option>
 				<option value='2592000'>30 days</option>
 			</select>
 			<button>Submit</button>
-		</form> 
+		</form>
+		</div id='postForm'> 
 	</div id='page_content'>	
 
 	<div id='sidebar'>
-		<h1><a href='/'>Welcome</a></h1>
+		<h1><a href='/'>welcome home</a></h1>
 		<h3>Browse Categories:</h3>
 		<ul>
 		<% categories.each do |category| %>

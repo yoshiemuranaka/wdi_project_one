@@ -31,21 +31,35 @@
 						<button>DELETE</button>
 					</form>
 					<% end %>
-			</div>
+			</div id='vote'>
+
+			<div id='subscribe'>
+				<p>Enter your phone number to receive text updates about this category!</p>
+				<br><form action='/category/<%= category.name %>/subscribe' method='POST'>
+					<input type='text' name='phone' placeholder='555-5551234'>
+					<button>Subscribe</button>
+				</form>
+			</div id='subscribe'>
+
 
 		<h3><a href='/category/<%= category.name %>/post/new'>Add a New Post</a></h3>
 	
 		<h3>Posts in this Category</h3>
 			<% posts.each do |post| %>
-			<div id='posts'><a href="/category/<%= category.name %>/post/<%= post.id %>"><%= post.title %></a></div id='posts'>
+			<div id='posts'>
+				<h4 style='display:inline;'><a href='/category/<%=post.cat_name%>/post/<%=post.id%>'><%= post.title %></a></h4>
+				<p style='display:inline;'><em><%= post.content[0..50] %>...</em></p>
+				<p>(<%= post.upvote+post.downvote%> Votes)</p>
+
+			</div id='posts'>
 			<% end %>
 			<%= will_paginate posts %>
-			
+
 	</div id='page_content'>
 
 
 	<div id='sidebar'>
-		<h1><a href='/'>Welcome</a></h1>
+		<h1><a href='/'>welcome home</a></h1>
 		<h3>Browse Categories:</h3>
 		<ul>
 		<% categories.each do |category| %>
