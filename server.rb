@@ -1,3 +1,4 @@
+#require 'will_paginate/active_record'
 require_relative './db/connection'
 require_relative './models/category'
 require_relative './models/post'
