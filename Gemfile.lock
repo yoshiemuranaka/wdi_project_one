@@ -1,24 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    mime-types (2.3)
-    netrc (0.7.7)
-    rest-client (1.7.2)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
-    sendgrid-ruby (0.0.3)
-      rest-client
-      smtpapi
-    sendgrid_ruby (0.0.4)
-      rest-client
-      smtpapi
-    smtpapi (0.0.4)
     will_paginate (3.0.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  sendgrid-ruby
-  sendgrid_ruby
   will_paginate (~> 3.0.5)
