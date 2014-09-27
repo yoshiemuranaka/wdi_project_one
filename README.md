@@ -1,14 +1,5 @@
-wdi_rosencrantz_project_one
-===========================
-
-Write a Readme that includes:
-the project's name and description,
-APIs or Gems used and descriptions of each,
-instructions for downloading the code and running it on localhost
-
-
 ## welcome home 
 
-welcome home is a forum for your apartment building to encourage communication and support between your neighbors, super, and landlord. you can openly discuss any questions or concerns as well as housing tips and neighborhood recommendations.
+is a forum template to encourage communication and support within your building, neighborhood, and community.
 
 gems used: sinatra, kramdown, will_paginate, twilio
