@@ -150,8 +150,8 @@ post '/category/:name/post/new' do
 		})
 
 ### SENDING SUBSCRIBERS TEXT UPDATE ABOUT NEW POST
-account_sid = "AC58b51516f7b7913f72dc347ae7031497"
-auth_token = "9c3f43ed9339d26d0b29fb63c9741651"
+account_sid = ""
+auth_token = ""
 client = Twilio::REST::Client.new account_sid, auth_token
 
 from ="+13234552057"
@@ -234,8 +234,8 @@ post '/category/:name/post/:id/comment' do
 	post.update({comments: comments})
 
 ### SENDING SUBSCRIBERS TEXT UPDATE ABOUT COMMENTS ON POST
-account_sid = "AC58b51516f7b7913f72dc347ae7031497"
-auth_token = "9c3f43ed9339d26d0b29fb63c9741651"
+account_sid = ""
+auth_token = ""
 client = Twilio::REST::Client.new account_sid, auth_token
 
 from ="+13234552057"
